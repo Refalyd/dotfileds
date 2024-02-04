@@ -1,0 +1,28 @@
+
+#!/bin/bash
+
+# A script to install dotfiles
+
+# Define the source and destination directories
+DOTFILES_DIR=~/dotfiles
+HOME_DIR=~
+
+# Create an array of dotfiles to install
+DOTFILES=(.bashrc .vimrc .gitconfig)
+
+# Loop through the dotfiles array
+for DOTFILE in "${DOTFILES[@]}"
+do
+  # Check if the dotfile exists in the source directory
+  if [ -f "$DOTFILES_DIR/$DOTFILE" ]; then
+    # Remove any existing dotfile in the destination directory
+    rm -f "$HOME_DIR/$DOTFILE"
+    # Create a symbolic link to the dotfile in the source directory
+    ln -s "$DOTFILES_DIR/$DOTFILE" "$HOME_DIR/$DOTFILE"
+    # Print a success message
+    echo "Installed $DOTFILE"
+  else
+    # Print an error message
+    echo "Error: $DOTFILE not found in $DOTFILES_DIR"
+  fi
+done

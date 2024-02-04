@@ -1,0 +1,51 @@
+  
+# ~/.bashrc
+
+# Set the prompt to show the current user, hostname, and working directory
+PS1="\[\e[1;32m\]\u@\h:\[\e[1;34m\]\w\[\e[0m\]\$ "
+
+# Set the secondary prompt to show a continuation character
+PS2="\[\e[1;33m\]>\[\e[0m\] "
+
+# Add the user's bin directory to the path
+PATH="$HOME/bin:$PATH"
+
+# Set the history size to 1000 commands
+HISTSIZE=1000
+
+# Define some useful functions
+# A function to list files by size
+lsize() {
+  ls -lSh "$@"
+}
+
+# A function to list files by date
+ldate() {
+  ls -lt "$@"
+}
+
+# A function to search for a pattern in files
+search() {
+  grep -rnI --color "$@"
+}
+
+# Define some aliases
+# An alias to clear the screen
+alias cls="clear"
+
+# An alias to update the system
+alias update="sudo apt update && sudo apt upgrade"
+
+# An alias to show the disk usage
+alias du="du -h --max-depth=1"
+
+# Source other files
+# Source the global bashrc file
+if [ -f /etc/bash.bashrc ]; then
+  . /etc/bash.bashrc
+fi
+
+# Source the user's profile file
+if [ -f ~/.bash_profile ]; then
+  . ~/.bash_profile
+fi
